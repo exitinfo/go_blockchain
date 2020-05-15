@@ -10,7 +10,6 @@ import (
 	"log"
 	"encoding/binary"
 	"encoding/gob"
-	"encoding/hex"
 	"os"
 	"flag"
 	"strconv"
@@ -42,8 +41,8 @@ type CLI struct {
 }
 type Transaction struct {
 	ID []byte
-	Vin []TxInput
-	Vout []TxOutput
+	Vin []TXInput
+	Vout []TXOutput
 }
 type TXOutput struct {
 	value int

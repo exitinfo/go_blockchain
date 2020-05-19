@@ -9,16 +9,16 @@ type MerkleTree struct {
 }
 
 type MerkleNode struct {
-	Left *MerkleNode
+	Left  *MerkleNode
 	Right *MerkleNode
-	Data []byte
+	Data  []byte
 }
 
 func NewMerkleTree(data [][]byte) *MerkleTree {
 	var nodes []MerkleNode
 
 	if len(data)%2 != 0 {
-		data = append(data, data[len(data) - 1])
+		data = append(data, data[len(data)-1])
 	}
 
 	for _, datum := range data {
@@ -37,7 +37,7 @@ func NewMerkleTree(data [][]byte) *MerkleTree {
 		nodes = newLevel
 	}
 
-	mTree := MerkleTree{&node[0]}
+	mTree := MerkleTree{&nodes[0]}
 
 	return &mTree
 }

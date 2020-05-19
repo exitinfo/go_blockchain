@@ -12,15 +12,14 @@ import (
 )
 
 const version = byte(0x00)
-const walletFile = "wallet.dat"
 const addressChecksumLen = 4
 
 type Wallet struct {
 	PrivateKey ecdsa.PrivateKey
-	PublicKey []byte
+	PublicKey  []byte
 }
 
-func NewWallet() *Wallet{
+func NewWallet() *Wallet {
 	private, public := newKeyPair()
 	wallet := Wallet{private, public}
 
@@ -79,4 +78,3 @@ func newKeyPair() (ecdsa.PrivateKey, []byte) {
 
 	return *private, pubKey
 }
-

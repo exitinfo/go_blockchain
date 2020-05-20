@@ -153,7 +153,7 @@ func dbExists(dbFile string) bool {
 func NewBlockchain(nodeID string) *Blockchain {
 	dbFile := fmt.Sprintf(dbFile, nodeID)
 
-	if dbExists() == false {
+	if dbExists(dbFile) == false {
 		fmt.Println("No existing blockchain found. Create one first.")
 		os.Exit(1)
 	}
@@ -182,7 +182,7 @@ func NewBlockchain(nodeID string) *Blockchain {
 
 func CreateBlockchain(address, nodeID string) *Blockchain {
 	dbFile := fmt.Sprintf(dbFile, nodeID)
-	if dbExists() {
+	if dbExists(dbFile) {
 		fmt.Println("Blockchain already exists.")
 		os.Exit(1)
 	}
@@ -292,14 +292,14 @@ func (bc *Blockchain) AddBlock(block *Block) {
 	}
 }
 
-func (bc *Blockchain) GetBestGeight() int {
+func (bc *Blockchain) GetBestHeight() int {
 	var lastBlock Block
 
 	err := bc.db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(blocksBucket))
 		lastHash := b.Get([]byte("l"))
 		blockData := b.Get(lastHash)
-		lastBlock := *DeserializeBlock(blockData)
+		lastBlock = *DeserializeBlock(blockData)
 
 		return nil
 	})

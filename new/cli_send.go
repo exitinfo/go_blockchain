@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-func (cli *CLI) send(from, to, nodeID string, amount int, mineNow bool) {
+func (cli *CLI) send(from, to string, amount int, nodeID string, mineNow bool) {
 	if !ValidateAddress(from) {
 		log.Panic("ERROR: Sender address is not valid")
 	}
